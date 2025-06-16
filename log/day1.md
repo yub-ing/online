@@ -1,0 +1,8 @@
+![vue3](https://github.com/user-attachments/assets/e34a0a4a-a2bc-4104-a212-aa087dd3f693)
+![vue2](https://github.com/user-attachments/assets/83b073a6-3307-49bf-b81d-dcd0e61ce2e0)
+![vue1](https://github.com/user-attachments/assets/c546405e-2b1a-4034-a8ee-2505c83df09d)
+![node、npm](https://github.com/user-attachments/assets/96239aad-3dc3-42b6-8069-5e83ddec8efd)
+![MySQL2](https://github.com/user-attachments/assets/f91a7098-6f61-4c91-bbaa-8c7e11a3d51e)
+![MySQL1](https://github.com/user-attachments/assets/84b13541-cc78-4df2-b557-6979e21e2567)
+![idea2](https://github.com/user-attachments/assets/28c9e6a6-c67d-44d0-9b27-4f461e301635)
+![idea1](https://github.com/user-attachments/assets/452ad9ac-1a55-4d80-b384-31540550a3a1)
