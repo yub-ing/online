@@ -59,10 +59,20 @@ const getUserInfo = async () => {
 
 //========================用户个人中心start
 import adminPersonal from '../../views/admin/Edit'
+import userPersonal from '../../views/user/Edit'
 const personal = async ()=>{
   let id = userInfo.value.id
   if(userInfo.value.role === 'admin'){
     const op = Dialog.open(adminPersonal, `个人中心`)
+    op.mounted(c => {
+      c.render(id,()=>{Msg.success("个人信息已更新")})
+    })
+    op.confirm(async (c) => {
+      c.submit()
+    })
+  }
+  if(userInfo.value.role === 'user'){
+    const op = Dialog.open(userPersonal, `个人中心`)
     op.mounted(c => {
       c.render(id,()=>{Msg.success("个人信息已更新")})
     })

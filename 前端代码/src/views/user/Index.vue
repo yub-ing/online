@@ -8,9 +8,23 @@
                                     <el-input clearable placeholder="请输入用户名" v-model="searchForm.username" maxlength="20"/>
                                 </div>
                                                     </div>
-                                                                            
+                                                                                                                                        <div class="search-item">
+                            <span>姓名</span>
+                                                            <div style="width: 150px">
+                                    <el-input clearable placeholder="请输入姓名" v-model="searchForm.name" maxlength="18"/>
+                                </div>
+                                                    </div>
+                                                                                                            <div class="search-item">
+                            <span>性别</span>
+                            <div style="width: 150px">
+                                <el-select filterable v-model="searchForm.gender" clearable placeholder="请选择">
+                                    <el-option v-for="item in genderOptionList" :key="item.name" :label="item.name" :value="item.name"/>
+                                </el-select>
+                            </div>
+                        </div>
+                                                                                                        
             <button class="btn btn-m" type="primary" @click="loadThisPage">查询</button>
-            <button class="btn btn-success btn-m" v-if="user && ( user.role.toLowerCase() == ''   )" @click="onAdd">新增</button>
+            <button class="btn btn-success btn-m" v-if="user && ( user.role.toLowerCase() == 'admin'   )" @click="onAdd">新增</button>
             <button class="btn btn-m" v-if=conf.EnableExcel @click="onExcel">导出excel</button>
             <button class="btn btn-m" v-if="user && (user.role.toLowerCase() == '')" @click="importExcel">导入excel</button>
         </el-row>
@@ -27,12 +41,32 @@
                 <span >{{scope.row.username}}</span>
             </template>
         </el-table-column>
-     
+                  <el-table-column label="姓名">
+            <template #default="scope">
+                <span >{{scope.row.name}}</span>
+            </template>
+        </el-table-column>
+                 <el-table-column label="性别">
+            <template #default="scope">
+                <span >{{scope.row.gender}}</span>
+            </template>
+        </el-table-column>
+                 <el-table-column label="年龄">
+            <template #default="scope">
+                <span >{{scope.row.age}}</span>
+            </template>
+        </el-table-column>
+                 <el-table-column label="电话">
+            <template #default="scope">
+                <span >{{scope.row.tele}}</span>
+            </template>
+        </el-table-column>
+    
             <el-table-column fixed="right" label="操作">
                 <template #default="scope">
                     <button class="btn" @click="onDetail(scope.row.id)">详情</button>
-                    <button class="btn btn-warn" v-if=" user.role.toLowerCase() == ''  " @click="onEdit(scope.row.id)">编辑</button>
-                    <button class="btn btn-error" v-if="  user.role.toLowerCase() == ''  " @click="onDelete(scope.row.id)">删除</button>
+                    <button class="btn btn-warn" v-if=" user.role.toLowerCase() == 'admin'  " @click="onEdit(scope.row.id)">编辑</button>
+                    <button class="btn btn-error" v-if="  user.role.toLowerCase() == 'admin'  " @click="onDelete(scope.row.id)">删除</button>
                     <el-button v-if="  conf.EnableChat  " link type="primary" size="small" @click="chatDetail(scope.row.id,scope.row.role,scope.row.username)">
                         <el-icon :size="20"><ChatDotSquare /></el-icon><!--联系-->
                     </el-button>
@@ -56,7 +90,7 @@
     </x-main>
 </template>
 
-<script setup name="admin">
+<script setup name="user">
     let conf = codeying
     import {Helper} from "core";
     let user = Cache.getUser()//当前登录用户
@@ -65,10 +99,13 @@
     //搜索条件表单
     let searchForm = ref({
             username : "",
+            name : "",
+            gender : "",
     })
     //分页信息 默认查询第一页，20条数据
     let pager = ref({current: 1, size: 20})
 
+    let genderOptionList = ref([  { name:'男'}, { name:'女'}, ]) //性别 下拉框数据
     //钩子函数，挂载
     onMounted(() => {
         loadThisPage()
@@ -82,7 +119,7 @@
             current: pager.value.current,
             size: pager.value.size
         });
-        let {data,message} = await Http.get(`/admin/list`, params);
+        let {data,message} = await Http.get(`/user/list`, params);
         console.log("查询条件")
         console.log(params)
         console.log("查询结果")
@@ -118,7 +155,7 @@
       const op = Msg.confirm(msg)
       op.then(async () => {
         let upsForm = {id: id, [field]: value}
-        let {success, message} = await Http.post(`/admin/save`, upsForm);
+        let {success, message} = await Http.post(`/user/save`, upsForm);
         if (!success) {
           Msg.error(message);
         }else{
@@ -140,13 +177,13 @@
     }
     //onExcel
     const onExcel = async () => {
-        Http.download({},false,"/admin/excel")
+        Http.download({},false,"/user/excel")
     }
     //删除
     const onDelete = async (id) => {
         const op = Msg.confirm('确定删除？')
         op.then(async () => {
-            let {success, message} = await Http.post(`/admin/delete?id=` + id);
+            let {success, message} = await Http.post(`/user/delete?id=` + id);
             if (!success) {
                 Msg.error(message);
             } else {

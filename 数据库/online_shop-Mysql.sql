@@ -12,6 +12,16 @@ create table tb_admin (
 )comment '管理员表';
 -- 默认插入一条管理员 数据
 insert into tb_admin (id,username,password) values('1234567890','1','1');
+create table tb_user (
+    id varchar(32) comment '主键',
+    username varchar(20) comment '用户名',
+    password varchar(20) comment '密码',
+    name varchar(18) comment '姓名',
+    gender varchar(10) comment '性别',
+    age int comment '年龄',
+    tele varchar(11) comment '电话',
+    PRIMARY KEY (`id`)
+)comment '用户表';
 
 
 

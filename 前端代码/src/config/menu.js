@@ -13,7 +13,9 @@ export default [
         path: "/hello/codeying",
         children: [
             {path: "/admin", name: "管理员", id: "1_0", parent: "1",roles:['admin',]},
+            {path: "/user", name: "用户", id: "1_1", parent: "1",roles:['admin',]},
         ]
     },
+
 ]
 

@@ -85,6 +85,19 @@ public class IndexController extends BaseController {
         return successData(apiRes);
       }
     }
+    if (usertype.equals("user")) {
+      QueryWrapper<User> wrapper = new QueryWrapper<>();
+      wrapper.eq("username", username);
+      wrapper.eq("password", password);
+      loginUser = userService.getOne(wrapper);
+      if (loginUser != null) {
+        String token = tokenService.createToken(loginUser);
+        apiRes.put("token", token);
+        apiRes.put("user", loginUser);
+        LoginInterceptor.userMap.put(token, loginUser);
+        return successData(apiRes);
+      }
+    }
     // 登陆失败，就重新登陆
     return fail("账号密码有误，登陆失败！");
   }
@@ -114,6 +127,26 @@ public class IndexController extends BaseController {
       adminService.save(admin);
       return successMsg("注册成功，请登陆");
     }
+    if (usertype.equals("user")) {
+      QueryWrapper<User> wrapper = new QueryWrapper<>();
+      wrapper.eq("username", username);
+      User temp = userService.getOne(wrapper);
+      if (temp != null) {
+        return fail("账号已存在！");
+      }
+      User user = new User();
+      user.setId(CommonUtils.newId());
+      user.setUsername(username);
+      user.setPassword(password);
+      String id = ""; // 主键
+      user.setId(CommonUtils.newId());
+      String name = ""; // 姓名
+      String gender = ""; // 性别
+      Integer age = 0; // 年龄
+      String tele = ""; // 电话
+      userService.save(user);
+      return successMsg("注册成功，请登陆");
+    }
     // 注册失败
     return successMsg("请选择角色类型");
   }
@@ -141,5 +174,29 @@ public class IndexController extends BaseController {
     return successData(getCurrentUser());
   }
 
+  // echarts数据
+  @PostMapping("hello")
+  @ResponseBody
+  public ApiResult<List<Echart>> helloData() throws SQLException {
+    // 数据
+    List<Echart> l = new ArrayList<>();
+    {
+      // 图表
+      Echart echart = new Echart();
+      echart.setName("数");
+      echart.setType("n"); // line pie
+      // echart.setValue(studentService.count()+"");
+      // l.add(echart.init());
+    }
+    {
+      // 图表
+      Echart echart = new Echart();
+      echart.setName("统计");
+      echart.setType("bar"); // line pie
+      // echart.setDtos(sqlMapper.exec("select id as name,score as value from tb_score"));
+      // l.add(echart.init());
+    }
+    return successData(l);
+  }
 }
 

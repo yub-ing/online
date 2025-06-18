@@ -18,19 +18,18 @@ const routes = [
     path: '/hello',
     name: 'Index',
     component: Index,
-    // redirect: '/login',
     children: [
-        {
-          meta: {history: true, title: "我的消息"},
-          path: '/hello/chat',
-          name: 'chat',
-          component: () => import('../components/chat/ChatList.vue')
-        },
         {
           meta: {history: true, title: "管理员"},
           path: '/hello/codeying/admin',
           name: 'admin',
           component: () => import('../views/admin/Index.vue')
+        },
+        {
+          meta: {history: true, title: "用户"},
+          path: '/hello/codeying/user',
+          name: 'user',
+          component: () => import('../views/user/Index.vue')
         },
     ]
   }
