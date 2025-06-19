@@ -16,6 +16,7 @@ window.codeying = {}
 //登录用户类型
 codeying.usertypeList = [
     {label:'管理员',value:'admin'},
+    {label:'商家',value:'merchant'},
     {label:'用户',value:'user'},
 ]
 //开启excel

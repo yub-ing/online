@@ -60,6 +60,10 @@ public class AdminController extends BaseController {
     if (!StringUtils.isEmpty(username)) {
       paramMap.like("username", username);
     }
+    String name = req.getParameter("name");
+    if (!StringUtils.isEmpty(name)) {
+      paramMap.like("name", name);
+    }
 
     String orderByStr = "id desc"; // 默认根据id降序排序
     // 默认按照id排序
@@ -82,6 +86,8 @@ public class AdminController extends BaseController {
     String id = entityTemp.getId(); // 主键
     String username = entityTemp.getUsername(); // 用户名
     String password = entityTemp.getPassword(); // 密码
+    String name = entityTemp.getName(); // 姓名
+    String tele = entityTemp.getTele(); // 电话
 
     // 新增或更新
     if (entityTemp.getId() == null || "".equals(entityTemp.getId())) { // 新增

@@ -85,6 +85,19 @@ public class IndexController extends BaseController {
         return successData(apiRes);
       }
     }
+    if (usertype.equals("merchant")) {
+      QueryWrapper<Merchant> wrapper = new QueryWrapper<>();
+      wrapper.eq("username", username);
+      wrapper.eq("password", password);
+      loginUser = merchantService.getOne(wrapper);
+      if (loginUser != null) {
+        String token = tokenService.createToken(loginUser);
+        apiRes.put("token", token);
+        apiRes.put("user", loginUser);
+        LoginInterceptor.userMap.put(token, loginUser);
+        return successData(apiRes);
+      }
+    }
     if (usertype.equals("user")) {
       QueryWrapper<User> wrapper = new QueryWrapper<>();
       wrapper.eq("username", username);
@@ -124,7 +137,30 @@ public class IndexController extends BaseController {
       admin.setPassword(password);
       String id = ""; // 主键
       admin.setId(CommonUtils.newId());
+      String name = ""; // 姓名
+      String tele = ""; // 电话
       adminService.save(admin);
+      return successMsg("注册成功，请登陆");
+    }
+    if (usertype.equals("merchant")) {
+      QueryWrapper<Merchant> wrapper = new QueryWrapper<>();
+      wrapper.eq("username", username);
+      Merchant temp = merchantService.getOne(wrapper);
+      if (temp != null) {
+        return fail("账号已存在！");
+      }
+      Merchant merchant = new Merchant();
+      merchant.setId(CommonUtils.newId());
+      merchant.setUsername(username);
+      merchant.setPassword(password);
+      String id = ""; // 主键
+      merchant.setId(CommonUtils.newId());
+      String name = ""; // 商家名
+      String avatar = ""; // 头像
+      String tele = ""; // 电话
+      String xiaodjj = ""; // 小店简介
+      String zhuynr = ""; // 主营内容
+      merchantService.save(merchant);
       return successMsg("注册成功，请登陆");
     }
     if (usertype.equals("user")) {
@@ -141,9 +177,12 @@ public class IndexController extends BaseController {
       String id = ""; // 主键
       user.setId(CommonUtils.newId());
       String name = ""; // 姓名
+      String avatar = ""; // 头像
       String gender = ""; // 性别
       Integer age = 0; // 年龄
       String tele = ""; // 电话
+      String youx = ""; // 邮箱
+      String place = ""; // 地址
       userService.save(user);
       return successMsg("注册成功，请登陆");
     }

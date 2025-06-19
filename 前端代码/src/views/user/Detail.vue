@@ -11,6 +11,9 @@
                  <el-form-item label="姓名">
             <el-input disabled v-model="form.name"  />
         </el-form-item>
+                <el-form-item label="头像">
+            <x-file-view :disabled="true" :list="form.avatar"></x-file-view>
+        </el-form-item>
                  <el-form-item label="性别">
             <el-input disabled v-model="form.gender"  />
         </el-form-item>
@@ -19,6 +22,12 @@
         </el-form-item>
                  <el-form-item label="电话">
             <el-input disabled v-model="form.tele"  />
+        </el-form-item>
+                 <el-form-item label="邮箱">
+            <el-input disabled v-model="form.youx"  />
+        </el-form-item>
+                 <el-form-item label="地址">
+            <el-input disabled v-model="form.place"  />
         </el-form-item>
         </el-form>
 

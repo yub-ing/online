@@ -24,6 +24,14 @@ public class Admin extends LoginUser implements Serializable {
   @TableField("password")
   private String password;
 
+  /** 姓名 */
+  @TableField("name")
+  private String name;
+
+  /** 电话 */
+  @TableField("tele")
+  private String tele;
+
   public String getId() {
     return id;
   }
@@ -46,6 +54,22 @@ public class Admin extends LoginUser implements Serializable {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getTele() {
+    return tele;
+  }
+
+  public void setTele(String tele) {
+    this.tele = tele;
   }
 
   /** 角色 */

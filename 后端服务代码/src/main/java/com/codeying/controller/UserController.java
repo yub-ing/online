@@ -35,7 +35,6 @@ import java.math.RoundingMode;
 @RequestMapping("user")
 public class UserController extends BaseController {
 
-
   // 用户列表数据
   @RequestMapping("list")
   @ResponseBody
@@ -104,9 +103,12 @@ public class UserController extends BaseController {
     String username = entityTemp.getUsername(); // 用户名
     String password = entityTemp.getPassword(); // 密码
     String name = entityTemp.getName(); // 姓名
+    String avatar = entityTemp.getAvatar(); // 头像
     String gender = entityTemp.getGender(); // 性别
     Integer age = entityTemp.getAge(); // 年龄
     String tele = entityTemp.getTele(); // 电话
+    String youx = entityTemp.getYoux(); // 邮箱
+    String place = entityTemp.getPlace(); // 地址
 
     // 新增或更新
     if (entityTemp.getId() == null || "".equals(entityTemp.getId())) { // 新增

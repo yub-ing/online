@@ -12,10 +12,15 @@ export default [
         id: "1",
         path: "/hello/codeying",
         children: [
-            {path: "/admin", name: "管理员", id: "1_0", parent: "1",roles:['admin',]},
-            {path: "/user", name: "用户", id: "1_1", parent: "1",roles:['admin',]},
+            {path: "/admin", name: "管理员", id: "1_0", parent: "1",roles:['',]},
+            {path: "/merchant", name: "商家", id: "1_1", parent: "1",roles:['admin','user',]},
+            {path: "/user", name: "用户", id: "1_2", parent: "1",roles:['admin','merchant',]},
         ]
     },
-
+    {
+        name: "我的消息",
+        id: "chat",
+        path: "/hello/chat"
+    },
 ]
 

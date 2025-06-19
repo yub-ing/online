@@ -9,6 +9,9 @@
         <el-form-item label="姓名" prop="name">
             <el-input maxlength="18" v-model="form.name" />
         </el-form-item>
+        <el-form-item label="头像" prop="avatarFile">
+            <x-uploader :count="1" v-model="avatarFile"></x-uploader>
+        </el-form-item>
         <el-form-item label="性别" prop="gender">
             <el-select filterable v-model="form.gender" clearable placeholder="Select">
                 <el-option v-for="item in genderOptionList" :key="item.name" :label="item.name" :value="item.name"/>
@@ -20,6 +23,12 @@
         <el-form-item label="电话" prop="tele">
             <el-input maxlength="11" v-model="form.tele" />
         </el-form-item>
+        <el-form-item label="邮箱" prop="youx">
+            <el-input maxlength="255" v-model="form.youx" />
+        </el-form-item>
+        <el-form-item label="地址" prop="place">
+            <el-input maxlength="255" v-model="form.place" />
+        </el-form-item>
     </el-form>
 </template>
 <script setup>
@@ -30,14 +39,21 @@
         username : '',
         password : '',
         name : '',
+        avatar : '',
         gender : '',
         age : '',
         tele : '',
+        youx : '',
+        place : '',
     });
     let callBack;//保存成功回调函数
     const rules = reactive({
         username:{required: true, message: "用户名必填", trigger: "blur"},
         name:{required: true, message: "姓名必填", trigger: "blur"},
+        gender:{required: true, message: "性别必填", trigger: "blur"},
+        tele:{required: true, message: "电话必填", trigger: "blur"},
+        youx:{required: true, message: "邮箱必填", trigger: "blur"},
+        place:{required: true, message: "地址必填", trigger: "blur"},
     })
 
      let genderOptionList = ref([  { name:'男'}, { name:'女'}, ]) //性别 下拉框数据
@@ -50,9 +66,12 @@
       }
     }
 
+    const avatarFile = ref([]) //头像
 
     //提交
     const submit = async () => {
+    //文件：头像
+    form.value.avatar = avatarFile.value.length>0 ? avatarFile.value[0].fileId : ''
 
         await formRef.value.validate(async (isValid, invalidFields) => {
             if(! isValid) {

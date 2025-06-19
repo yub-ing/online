@@ -28,6 +28,10 @@ public class User extends LoginUser implements Serializable {
   @TableField("name")
   private String name;
 
+  /** 头像 */
+  @TableField("avatar")
+  private String avatar;
+
   /** 性别 */
   @TableField("gender")
   private String gender;
@@ -39,6 +43,14 @@ public class User extends LoginUser implements Serializable {
   /** 电话 */
   @TableField("tele")
   private String tele;
+
+  /** 邮箱 */
+  @TableField("youx")
+  private String youx;
+
+  /** 地址 */
+  @TableField("place")
+  private String place;
 
   public String getId() {
     return id;
@@ -72,6 +84,14 @@ public class User extends LoginUser implements Serializable {
     this.name = name;
   }
 
+  public String getAvatar() {
+    return avatar;
+  }
+
+  public void setAvatar(String avatar) {
+    this.avatar = avatar;
+  }
+
   public String getGender() {
     return gender;
   }
@@ -96,23 +116,28 @@ public class User extends LoginUser implements Serializable {
     this.tele = tele;
   }
 
+  public String getYoux() {
+    return youx;
+  }
+
+  public void setYoux(String youx) {
+    this.youx = youx;
+  }
+
+  public String getPlace() {
+    return place;
+  }
+
+  public void setPlace(String place) {
+    this.place = place;
+  }
+
   /** 角色 */
   @TableField(exist = false)
   private String role = "user";
 
   @TableField(exist = false)
   private String rolech = "用户";
-
-  @TableField(exist = false)
-  private String avatar;
-
-  public String getAvatar() {
-    return avatar;
-  }
-
-  public void setAvatar(String avatar) {
-    this.avatar = avatar;
-  }
 
   public String getRole() {
     return role;

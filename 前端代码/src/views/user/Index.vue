@@ -14,7 +14,7 @@
                                     <el-input clearable placeholder="请输入姓名" v-model="searchForm.name" maxlength="18"/>
                                 </div>
                                                     </div>
-                                                                                                            <div class="search-item">
+                                                                                                                                        <div class="search-item">
                             <span>性别</span>
                             <div style="width: 150px">
                                 <el-select filterable v-model="searchForm.gender" clearable placeholder="请选择">
@@ -22,7 +22,7 @@
                                 </el-select>
                             </div>
                         </div>
-                                                                                                        
+                                                                                                                                                                
             <button class="btn btn-m" type="primary" @click="loadThisPage">查询</button>
             <button class="btn btn-success btn-m" v-if="user && ( user.role.toLowerCase() == 'admin'   )" @click="onAdd">新增</button>
             <button class="btn btn-m" v-if=conf.EnableExcel @click="onExcel">导出excel</button>
@@ -46,6 +46,13 @@
                 <span >{{scope.row.name}}</span>
             </template>
         </el-table-column>
+                 <el-table-column label="头像">
+            <template #default="scope">
+                <el-tooltip class="box-item" effect="dark" :content="scope.row.avatar" placement="top-start">
+                    <x-file-view :disabled="true" :list="scope.row.avatar"></x-file-view>
+                </el-tooltip>
+            </template>
+        </el-table-column>
                  <el-table-column label="性别">
             <template #default="scope">
                 <span >{{scope.row.gender}}</span>
@@ -59,6 +66,16 @@
                  <el-table-column label="电话">
             <template #default="scope">
                 <span >{{scope.row.tele}}</span>
+            </template>
+        </el-table-column>
+                 <el-table-column label="邮箱">
+            <template #default="scope">
+                <span >{{scope.row.youx}}</span>
+            </template>
+        </el-table-column>
+                 <el-table-column label="地址">
+            <template #default="scope">
+                <span >{{scope.row.place}}</span>
             </template>
         </el-table-column>
     
@@ -194,6 +211,22 @@
     }
 
 
+    //chat
+    import Chat from "../../components/chat/Chat";
+    const chatDetail=(rid,rtype,hisName)=>{
+        const op = Dialog.open(Chat, `与"${ hisName}"的聊天`).setCancelText('').setConfirmText('')
+        op.mounted(c => {
+            c.render(rid,rtype,hisName)
+        })
+    }
+
+    import ImportExcel from "../../components/lib/ImportExcel";
+    const importExcel = ()=>{
+        const op = Dialog.open(ImportExcel, `导入用户数据`).setCancelText('').setConfirmText('')
+        op.mounted(c => {
+            c.render('user',loadThisPage)
+        })
+    }
 </script>
 
 

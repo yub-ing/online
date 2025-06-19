@@ -8,6 +8,12 @@
                                     <el-input clearable placeholder="请输入用户名" v-model="searchForm.username" maxlength="20"/>
                                 </div>
                                                     </div>
+                                                                                                                                        <div class="search-item">
+                            <span>姓名</span>
+                                                            <div style="width: 150px">
+                                    <el-input clearable placeholder="请输入姓名" v-model="searchForm.name" maxlength="12"/>
+                                </div>
+                                                    </div>
                                                                             
             <button class="btn btn-m" type="primary" @click="loadThisPage">查询</button>
             <button class="btn btn-success btn-m" v-if="user && ( user.role.toLowerCase() == ''   )" @click="onAdd">新增</button>
@@ -27,7 +33,17 @@
                 <span >{{scope.row.username}}</span>
             </template>
         </el-table-column>
-     
+                  <el-table-column label="姓名">
+            <template #default="scope">
+                <span >{{scope.row.name}}</span>
+            </template>
+        </el-table-column>
+                 <el-table-column label="电话">
+            <template #default="scope">
+                <span >{{scope.row.tele}}</span>
+            </template>
+        </el-table-column>
+    
             <el-table-column fixed="right" label="操作">
                 <template #default="scope">
                     <button class="btn" @click="onDetail(scope.row.id)">详情</button>
@@ -65,6 +81,7 @@
     //搜索条件表单
     let searchForm = ref({
             username : "",
+            name : "",
     })
     //分页信息 默认查询第一页，20条数据
     let pager = ref({current: 1, size: 20})
@@ -157,6 +174,22 @@
     }
 
 
+    //chat
+    import Chat from "../../components/chat/Chat";
+    const chatDetail=(rid,rtype,hisName)=>{
+        const op = Dialog.open(Chat, `与"${ hisName}"的聊天`).setCancelText('').setConfirmText('')
+        op.mounted(c => {
+            c.render(rid,rtype,hisName)
+        })
+    }
+
+    import ImportExcel from "../../components/lib/ImportExcel";
+    const importExcel = ()=>{
+        const op = Dialog.open(ImportExcel, `导入管理员数据`).setCancelText('').setConfirmText('')
+        op.mounted(c => {
+            c.render('admin',loadThisPage)
+        })
+    }
 </script>
 
 

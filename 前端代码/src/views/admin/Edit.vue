@@ -6,6 +6,12 @@
                                                                                     <el-form-item label="密码" prop="password">
                         <el-input  maxlength="20" v-model="form.password" />
                     </el-form-item>
+                                                                                    <el-form-item label="姓名" prop="name">
+                        <el-input  maxlength="12" v-model="form.name" />
+                    </el-form-item>
+                                                                                    <el-form-item label="电话" prop="tele">
+                        <el-input  maxlength="11" v-model="form.tele" />
+                    </el-form-item>
                                         </el-form>
 </template>
 <script setup>
@@ -16,6 +22,7 @@
     let callBack;//保存成功回调函数
     const rules = reactive({
         username:{required: true, message: "用户名必填", trigger: "blur"},
+        name:{required: true, message: "姓名必填", trigger: "blur"},
     })
 
 

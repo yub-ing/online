@@ -8,6 +8,12 @@
              <el-form-item label="用户名">
             <el-input disabled v-model="form.username"  />
         </el-form-item>
+                 <el-form-item label="姓名">
+            <el-input disabled v-model="form.name"  />
+        </el-form-item>
+                 <el-form-item label="电话">
+            <el-input disabled v-model="form.tele"  />
+        </el-form-item>
         </el-form>
 
 

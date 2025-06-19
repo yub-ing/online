@@ -13,6 +13,7 @@ import com.codeying.service.*;
 public class BaseController {
 
   @Autowired protected AdminService adminService;
+  @Autowired protected MerchantService merchantService;
   @Autowired protected UserService userService;
   @Autowired protected HttpServletRequest req;
 
