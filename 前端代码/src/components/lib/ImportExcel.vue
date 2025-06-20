@@ -156,6 +156,44 @@
             </template>
         </el-upload>
     </template>
+    <template v-if="type === 'stype'">
+        <p style="color: red">提示：按照以下格式上传,第一行是表头</p>
+        <table class="modal-table">
+            <tr>
+                                                                                  <td style="background-color: #0FB25F">类型名</td>
+                                                             <td style="background-color: #0FB25F">说明</td>
+                            </tr>
+            <tr>
+                                                                                                              <td>类型名...</td>
+                                                                                         <td>说明...</td>
+                            </tr>
+            <tr>
+                                                                                  <td>...</td>
+                                                             <td>...</td>
+                            </tr>
+        </table>
+        <el-upload
+                ref="uploadRef"
+                class="upload-demo"
+                action="#"
+                :limit="1"
+                :auto-upload="false"
+                :on-exceed="handleExceed"
+                :http-request="upload"
+        >
+            <template #trigger>
+                <el-button type="primary">选择文件</el-button>
+            </template>
+            <el-button class="ml-3" type="success" @click="submitUpload">
+                立即导入
+            </el-button>
+            <template #tip>
+                <div class="el-upload__tip text-red">
+                    请按照以上格式上传excel文件
+                </div>
+            </template>
+        </el-upload>
+    </template>
 </template>
 
 <script setup>

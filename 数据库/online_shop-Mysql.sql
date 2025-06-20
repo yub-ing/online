@@ -38,6 +38,12 @@ create table tb_user (
     place varchar(255) comment '地址',
     PRIMARY KEY (`id`)
 )comment '用户表';
+create table tb_stype (
+    id varchar(32) comment '主键',
+    name varchar(18) comment '类型名',
+    describtion varchar(255) comment '说明',
+    PRIMARY KEY (`id`)
+)comment '商品类型表';
 
 
 

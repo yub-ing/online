@@ -15,6 +15,7 @@ export default [
             {path: "/admin", name: "管理员", id: "1_0", parent: "1",roles:['',]},
             {path: "/merchant", name: "商家", id: "1_1", parent: "1",roles:['admin','user',]},
             {path: "/user", name: "用户", id: "1_2", parent: "1",roles:['admin','merchant',]},
+            {path: "/stype", name: "商品类型", id: "1_3", parent: "1",roles:['admin','merchant',]},
         ]
     },
     {

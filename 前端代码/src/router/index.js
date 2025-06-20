@@ -44,6 +44,12 @@ const routes = [
           name: 'user',
           component: () => import('../views/user/Index.vue')
         },
+        {
+          meta: {history: true, title: "商品类型"},
+          path: '/hello/codeying/stype',
+          name: 'stype',
+          component: () => import('../views/stype/Index.vue')
+        },
     ]
   }
 ]
