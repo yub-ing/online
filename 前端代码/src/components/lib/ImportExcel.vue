@@ -156,6 +156,68 @@
             </template>
         </el-upload>
     </template>
+    <template v-if="type === 'goods'">
+        <p style="color: red">提示：按照以下格式上传,第一行是表头</p>
+        <table class="modal-table">
+            <tr>
+                                                                                  <td style="background-color: #0FB25F">首页图片</td>
+                                                             <td style="background-color: #0FB25F">商品名称</td>
+                                                             <td style="background-color: #0FB25F">简介</td>
+                                                             <td style="background-color: #0FB25F">类型</td>
+                                                             <td style="background-color: #0FB25F">商家</td>
+                                                             <td style="background-color: #0FB25F">价格</td>
+                                                             <td style="background-color: #0FB25F">商品内容</td>
+                                                             <td style="background-color: #0FB25F">库存数量</td>
+                                                             <td style="background-color: #0FB25F">发布时间</td>
+                                                             <td style="background-color: #0FB25F">展示</td>
+                            </tr>
+            <tr>
+                                                                                                              <td>首页图片...</td>
+                                                                                         <td>商品名称...</td>
+                                                                                         <td>简介...</td>
+                                                                                         <td>确保该类型在商品类型表中存在</td>
+                                                                                                 <td>确保该商家在商家表中存在</td>
+                                                                                                 <td>价格...</td>
+                                                                                         <td>商品内容...</td>
+                                                                                         <td>库存数量...</td>
+                                                                                         <td>格式例：1999年06月05日 12:15:00</td>
+                                                                                                 <td>展示...</td>
+                            </tr>
+            <tr>
+                                                                                  <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                            </tr>
+        </table>
+        <el-upload
+                ref="uploadRef"
+                class="upload-demo"
+                action="#"
+                :limit="1"
+                :auto-upload="false"
+                :on-exceed="handleExceed"
+                :http-request="upload"
+        >
+            <template #trigger>
+                <el-button type="primary">选择文件</el-button>
+            </template>
+            <el-button class="ml-3" type="success" @click="submitUpload">
+                立即导入
+            </el-button>
+            <template #tip>
+                <div class="el-upload__tip text-red">
+                    请按照以上格式上传excel文件
+                </div>
+            </template>
+        </el-upload>
+    </template>
     <template v-if="type === 'stype'">
         <p style="color: red">提示：按照以下格式上传,第一行是表头</p>
         <table class="modal-table">

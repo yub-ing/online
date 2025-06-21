@@ -38,6 +38,20 @@ create table tb_user (
     place varchar(255) comment '地址',
     PRIMARY KEY (`id`)
 )comment '用户表';
+create table tb_goods (
+    id varchar(32) comment '主键',
+    showpic varchar(255) comment '首页图片',
+    showtitle varchar(255) comment '商品名称',
+    showdesc TEXT comment '简介',
+    leix varchar(32) comment '类型',
+    mid varchar(32) comment '商家',
+    price double comment '价格',
+    showdetail TEXT comment '商品内容',
+    count int comment '库存数量',
+    publishtime datetime comment '发布时间',
+    vv varchar(255) comment '展示',
+    PRIMARY KEY (`id`)
+)comment '商品信息表';
 create table tb_stype (
     id varchar(32) comment '主键',
     name varchar(18) comment '类型名',
