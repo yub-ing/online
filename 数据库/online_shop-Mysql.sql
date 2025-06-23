@@ -58,6 +58,13 @@ create table tb_stype (
     describtion varchar(255) comment '说明',
     PRIMARY KEY (`id`)
 )comment '商品类型表';
+create table tb_notice (
+    id varchar(32) comment '主键',
+    title varchar(255) comment '标题',
+    content varchar(255) comment '内容',
+    createtime datetime comment '发布时间',
+    PRIMARY KEY (`id`)
+)comment '公告表';
 
 
 
