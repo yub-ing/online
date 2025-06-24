@@ -18,6 +18,7 @@ public class BaseController {
   @Autowired protected GoodsService goodsService;
   @Autowired protected StypeService stypeService;
   @Autowired protected NoticeService noticeService;
+  @Autowired protected StarService starService;
   @Autowired protected HttpServletRequest req;
 
   @Autowired protected HttpServletResponse resp;

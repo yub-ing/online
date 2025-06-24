@@ -36,6 +36,139 @@ public class IndexController extends BaseController {
   @Autowired CacheUtil cacheUtil;
   @Autowired private SqlMapper sqlMapper;
 
+  /**
+   * 首页访问
+   *
+   * @return
+   */
+  @RequestMapping({"welcome", "/"})
+  @ResponseBody
+  public ApiResult welcome() {
+    Map<String, Object> res = new HashMap<>();
+    LoginUser user = getCurrentUser();
+    String action = req.getParameter("action"); // 操作实体
+    String entityName = req.getParameter("entityName"); // 操作实体
+    String id = req.getParameter("id");
+    // 默认实体
+    if (StringUtils.isEmpty(entityName)) {
+      entityName = "goods";
+    }
+    res.put("entityName", entityName);
+    // 我的收藏数
+    if (user == null) {
+      res.put("myStartCount", 0);
+    } else {
+      long starCount =
+          starService.count(
+              new LambdaQueryWrapper<Star>()
+                  .eq(Star::getUserid, user.getId())
+                  .eq(Star::getType, "收藏"));
+      res.put("myStartCount", starCount);
+    }
+
+    if (StringUtils.isEmpty(action)) {
+      // 商品信息首页和详情页
+      if (entityName.equals("goods")) {
+        // 热门
+        List<Star> hotList = starService.topN("goods", 4);
+        res.put("hotList", hotList);
+        if (StringUtils.isEmpty(id)) { // 首页
+          // 查询条件
+          String title = req.getParameter("title");
+          if (!StringUtils.isEmpty(title)) {
+            res.put("title", title);
+          }
+          // 公告
+          List<Notice> notices = noticeService.list();
+          res.put("notices", notices);
+          // 数据
+          List<Goods> itemList =
+              goodsService.list(
+                  new LambdaQueryWrapper<Goods>()
+                      .like(!StringUtils.isEmpty(title), Goods::getShowtitle, title));
+          res.put("itemList", itemList);
+          return successData(res);
+        } else {
+          // 详情页
+          Goods detail = goodsService.getById(id);
+          // 获取外键数据:商品类型
+          detail.setLeixFrn(stypeService.getById(detail.getLeix()));
+          // 获取外键数据:商家
+          detail.setMidFrn(merchantService.getById(detail.getMid()));
+          res.put("detail", detail);
+          // 收藏数
+          long starCount =
+              starService.count(
+                  new LambdaQueryWrapper<Star>()
+                      .eq(Star::getItemid, detail.getId())
+                      .eq(Star::getType, "收藏"));
+          res.put("starCount", starCount);
+          long praiseCount =
+              starService.count(
+                  new LambdaQueryWrapper<Star>()
+                      .eq(Star::getItemid, detail.getId())
+                      .eq(Star::getType, "点赞"));
+          res.put("praiseCount", praiseCount);
+          return successData(res);
+        }
+      }
+    } else {
+      if (user == null) {
+        return fail("获取收藏失败，用户未登录");
+      }
+      if (action.equals("stars")) {
+        List<Star> stars = starService.userStar(user.getId(), user.getRole());
+        res.put("entityName", "star");
+        res.put("stars", stars);
+        return successData(res);
+      }
+    }
+    return fail();
+  }
+
+  /**
+   * 收藏查询
+   *
+   * @return
+   */
+  @RequestMapping("welcome2")
+  @ResponseBody
+  public ApiResult welcome2(String action, String entityName, String id, String op) {
+    LoginUser user = getCurrentUser();
+
+    if (action.equals("hasStar")) {
+      if (user != null) {
+        String starId = starService.hasStar(user.getId(), user.getRole(), id, entityName, op);
+        return ApiResult.successData(starId); // 返回starId，前端判断不为空则是收藏了
+      } else {
+        return ApiResult.successData(null); // 标记成功
+      }
+    }
+
+    if (user == null) {
+      return fail("请先登录");
+    }
+    // 收藏
+    if (action.equals("star")) {
+      boolean res = starService.star(user.getId(), user.getRole(), id, entityName, op);
+      if (res) {
+        return (ApiResult.successMsg(op + "成功")); // 标记成功
+      } else {
+        return (ApiResult.fail("已" + op + "过了~"));
+      }
+    }
+    // 取消收藏
+    else if (action.equals("cancelStar")) {
+      starService.remove(
+          new LambdaQueryWrapper<Star>()
+              .eq(Star::getItemid, id)
+              .eq(Star::getType, op)
+              .eq(Star::getUserid, user.getId()));
+      return ApiResult.success(); // 标记成功
+    }
+    return ApiResult.success();
+  }
+
   @GetMapping("/captcha")
   @ResponseBody
   public ApiResult<Map<String, Object>> captcha() {
