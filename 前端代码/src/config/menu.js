@@ -3,6 +3,11 @@
  */
 export default [
     {
+        name: "网站首页",
+        id: "0_0",
+        path: "/",
+    },
+    {
         name: "首页",
         id: "0",
         path: "/hello"

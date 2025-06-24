@@ -7,10 +7,32 @@ const routes = [
     name: 'Login',
     component: Login,
   },
+  //前台页面router
   {
     path: '/',
     name: 'Web',
-    component: Index
+    component: () => import('../views/web/WebIndex.vue'),//网站首页router-view
+    children: [
+      {
+        path: '/welcome',
+        name: 'Welcome',
+        component: () => import('../views/web/Web.vue') //首页
+      },{
+        path: '/welcome/star',
+        name: 'WelcomeStar',
+        component: () => import('../views/web/WebStar.vue') //收藏页
+      },
+      {
+        path: '/welcome/goods',
+        name: 'WelcomeGoodsList',
+        component: () => import('../views/web/Web.vue')//商品信息  首页
+      },
+      {
+        path: '/welcome/goods/detail',
+        name: 'WelcomeGoodsDetail',
+        component: () => import('../views/web/GoodsDetail.vue')//商品信息  详情页
+      },
+    ]
   },
 
   //后台页面router
