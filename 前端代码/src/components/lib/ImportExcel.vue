@@ -256,6 +256,59 @@
             </template>
         </el-upload>
     </template>
+    <template v-if="type === 'cart'">
+        <p style="color: red">提示：按照以下格式上传,第一行是表头</p>
+        <table class="modal-table">
+            <tr>
+                                                                                  <td style="background-color: #0FB25F">用户</td>
+                                                             <td style="background-color: #0FB25F">商品</td>
+                                                             <td style="background-color: #0FB25F">商品图片</td>
+                                                             <td style="background-color: #0FB25F">价格</td>
+                                                             <td style="background-color: #0FB25F">数量</td>
+                                                             <td style="background-color: #0FB25F">总价</td>
+                                                             <td style="background-color: #0FB25F">加购时间</td>
+                            </tr>
+            <tr>
+                                                                                                              <td>确保该用户在用户表中存在</td>
+                                                                                                 <td>确保该商品在商品信息表中存在</td>
+                                                                                                 <td>商品图片...</td>
+                                                                                         <td>价格...</td>
+                                                                                         <td>数量...</td>
+                                                                                         <td>总价...</td>
+                                                                                         <td>格式例：1999年06月05日 12:15:00</td>
+                                    </tr>
+            <tr>
+                                                                                  <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                            </tr>
+        </table>
+        <el-upload
+                ref="uploadRef"
+                class="upload-demo"
+                action="#"
+                :limit="1"
+                :auto-upload="false"
+                :on-exceed="handleExceed"
+                :http-request="upload"
+        >
+            <template #trigger>
+                <el-button type="primary">选择文件</el-button>
+            </template>
+            <el-button class="ml-3" type="success" @click="submitUpload">
+                立即导入
+            </el-button>
+            <template #tip>
+                <div class="el-upload__tip text-red">
+                    请按照以上格式上传excel文件
+                </div>
+            </template>
+        </el-upload>
+    </template>
     <template v-if="type === 'notice'">
         <p style="color: red">提示：按照以下格式上传,第一行是表头</p>
         <table class="modal-table">

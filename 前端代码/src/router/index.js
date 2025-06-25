@@ -79,6 +79,12 @@ const routes = [
           component: () => import('../views/stype/Index.vue')
         },
         {
+          meta: {history: true, title: "购物车"},
+          path: '/hello/codeying/cart',
+          name: 'cart',
+          component: () => import('../views/cart/Index.vue')
+        },
+        {
           meta: {history: true, title: "公告"},
           path: '/hello/codeying/notice',
           name: 'notice',
