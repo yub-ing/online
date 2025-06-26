@@ -309,6 +309,140 @@
             </template>
         </el-upload>
     </template>
+    <template v-if="type === 'orderdetail'">
+        <p style="color: red">提示：按照以下格式上传,第一行是表头</p>
+        <table class="modal-table">
+            <tr>
+                                                                                  <td style="background-color: #0FB25F">用户</td>
+                                                             <td style="background-color: #0FB25F">商品</td>
+                                                             <td style="background-color: #0FB25F">商家</td>
+                                                             <td style="background-color: #0FB25F">商品图片</td>
+                                                             <td style="background-color: #0FB25F">价格</td>
+                                                             <td style="background-color: #0FB25F">数量</td>
+                                                             <td style="background-color: #0FB25F">总价</td>
+                                                             <td style="background-color: #0FB25F">时间</td>
+                            </tr>
+            <tr>
+                                                                                                              <td>确保该用户在用户表中存在</td>
+                                                                                                 <td>确保该商品在商品信息表中存在</td>
+                                                                                                 <td>确保该商家在商家表中存在</td>
+                                                                                                 <td>商品图片...</td>
+                                                                                         <td>价格...</td>
+                                                                                         <td>数量...</td>
+                                                                                         <td>总价...</td>
+                                                                                         <td>格式例：1999年06月05日 12:15:00</td>
+                                    </tr>
+            <tr>
+                                                                                  <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                            </tr>
+        </table>
+        <el-upload
+                ref="uploadRef"
+                class="upload-demo"
+                action="#"
+                :limit="1"
+                :auto-upload="false"
+                :on-exceed="handleExceed"
+                :http-request="upload"
+        >
+            <template #trigger>
+                <el-button type="primary">选择文件</el-button>
+            </template>
+            <el-button class="ml-3" type="success" @click="submitUpload">
+                立即导入
+            </el-button>
+            <template #tip>
+                <div class="el-upload__tip text-red">
+                    请按照以上格式上传excel文件
+                </div>
+            </template>
+        </el-upload>
+    </template>
+    <template v-if="type === 'order'">
+        <p style="color: red">提示：按照以下格式上传,第一行是表头</p>
+        <table class="modal-table">
+            <tr>
+                                                                                  <td style="background-color: #0FB25F">用户</td>
+                                                             <td style="background-color: #0FB25F">订单号</td>
+                                                             <td style="background-color: #0FB25F">收货人</td>
+                                                             <td style="background-color: #0FB25F">收货人电话</td>
+                                                             <td style="background-color: #0FB25F">收货人地址</td>
+                                                             <td style="background-color: #0FB25F">订单备注</td>
+                                                             <td style="background-color: #0FB25F">下单时间</td>
+                                                             <td style="background-color: #0FB25F">商家</td>
+                                                             <td style="background-color: #0FB25F">订单内容</td>
+                                                             <td style="background-color: #0FB25F">订单详情</td>
+                                                             <td style="background-color: #0FB25F">总价格</td>
+                                                             <td style="background-color: #0FB25F">状态</td>
+                                                             <td style="background-color: #0FB25F">物流单号</td>
+                                                             <td style="background-color: #0FB25F">物流信息</td>
+                                                             <td style="background-color: #0FB25F">评价</td>
+                            </tr>
+            <tr>
+                                                                                                              <td>确保该用户在用户表中存在</td>
+                                                                                                 <td>订单号...</td>
+                                                                                         <td>收货人...</td>
+                                                                                         <td>收货人电话...</td>
+                                                                                         <td>收货人地址...</td>
+                                                                                         <td>订单备注...</td>
+                                                                                         <td>格式例：1999年06月05日 12:15:00</td>
+                                                                                                 <td>确保该商家在商家表中存在</td>
+                                                                                                 <td>订单内容...</td>
+                                                                                         <td>订单详情...</td>
+                                                                                         <td>总价格...</td>
+                                                                                         <td>
+                                                                    已下单、                                                                    已支付、                                                                    已送达、                                                                    已退款                                                            </td>
+                                                                                                 <td>物流单号...</td>
+                                                                                         <td>物流信息...</td>
+                                                                                         <td>评价...</td>
+                            </tr>
+            <tr>
+                                                                                  <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                            </tr>
+        </table>
+        <el-upload
+                ref="uploadRef"
+                class="upload-demo"
+                action="#"
+                :limit="1"
+                :auto-upload="false"
+                :on-exceed="handleExceed"
+                :http-request="upload"
+        >
+            <template #trigger>
+                <el-button type="primary">选择文件</el-button>
+            </template>
+            <el-button class="ml-3" type="success" @click="submitUpload">
+                立即导入
+            </el-button>
+            <template #tip>
+                <div class="el-upload__tip text-red">
+                    请按照以上格式上传excel文件
+                </div>
+            </template>
+        </el-upload>
+    </template>
     <template v-if="type === 'notice'">
         <p style="color: red">提示：按照以下格式上传,第一行是表头</p>
         <table class="modal-table">

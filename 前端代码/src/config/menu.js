@@ -23,7 +23,9 @@ export default [
             {path: "/goods", name: "商品信息", id: "1_3", parent: "1",roles:['admin','user','merchant',]},
             {path: "/stype", name: "商品类型", id: "1_4", parent: "1",roles:['admin','merchant',]},
             {path: "/cart", name: "购物车", id: "1_5", parent: "1",roles:['admin','user',]},
-            {path: "/notice", name: "公告", id: "1_6", parent: "1",roles:['admin','user','merchant',]},
+            {path: "/orderdetail", name: "订单详情", id: "1_6", parent: "1",roles:['admin','user','merchant',]},
+            {path: "/order", name: "用户订单", id: "1_7", parent: "1",roles:['admin','user','merchant',]},
+            {path: "/notice", name: "公告", id: "1_8", parent: "1",roles:['admin','user','merchant',]},
         ]
     },
     {

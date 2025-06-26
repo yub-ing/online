@@ -69,6 +69,37 @@ create table tb_cart (
     createtime datetime comment '加购时间',
     PRIMARY KEY (`id`)
 )comment '购物车表';
+create table tb_orderdetail (
+    id varchar(32) comment '主键',
+    userid varchar(32) comment '用户',
+    goodsid varchar(32) comment '商品',
+    mid varchar(32) comment '商家',
+    tustp varchar(255) comment '商品图片',
+    price double comment '价格',
+    count int comment '数量',
+    zongj double comment '总价',
+    createtime datetime comment '时间',
+    PRIMARY KEY (`id`)
+)comment '订单详情表';
+create table tb_order (
+    id varchar(32) comment '主键',
+    userid varchar(32) comment '用户',
+    numb varchar(255) comment '订单号',
+    sname varchar(20) comment '收货人',
+    stele varchar(11) comment '收货人电话',
+    saddr varchar(255) comment '收货人地址',
+    dingdbz varchar(255) comment '订单备注',
+    createtime datetime comment '下单时间',
+    mid varchar(32) comment '商家',
+    content varchar(255) comment '订单内容',
+    details varchar(255) comment '订单详情',
+    price double comment '总价格',
+    state varchar(255) comment '状态',
+    wuliu varchar(255) comment '物流单号',
+    wulxx varchar(255) comment '物流信息',
+    pingj varchar(255) comment '评价',
+    PRIMARY KEY (`id`)
+)comment '用户订单表';
 create table tb_notice (
     id varchar(32) comment '主键',
     title varchar(255) comment '标题',

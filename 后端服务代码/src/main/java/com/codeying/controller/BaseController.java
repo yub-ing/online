@@ -18,6 +18,8 @@ public class BaseController {
   @Autowired protected GoodsService goodsService;
   @Autowired protected StypeService stypeService;
   @Autowired protected CartService cartService;
+  @Autowired protected OrderdetailService orderdetailService;
+  @Autowired protected OrderService orderService;
   @Autowired protected NoticeService noticeService;
   @Autowired protected StarService starService;
   @Autowired protected HttpServletRequest req;

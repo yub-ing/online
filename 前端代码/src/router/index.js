@@ -85,6 +85,18 @@ const routes = [
           component: () => import('../views/cart/Index.vue')
         },
         {
+          meta: {history: true, title: "订单详情"},
+          path: '/hello/codeying/orderdetail',
+          name: 'orderdetail',
+          component: () => import('../views/orderdetail/Index.vue')
+        },
+        {
+          meta: {history: true, title: "用户订单"},
+          path: '/hello/codeying/order',
+          name: 'order',
+          component: () => import('../views/order/Index.vue')
+        },
+        {
           meta: {history: true, title: "公告"},
           path: '/hello/codeying/notice',
           name: 'notice',
