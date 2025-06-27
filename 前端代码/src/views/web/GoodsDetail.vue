@@ -17,7 +17,7 @@
                         <button v-show="!startBtnShow" type="button" @click="cancelStar(`${detail.id}`)">取消收藏</button>
                         <button v-show="praiseBtnShow" type="button" @click="star(`${detail.id}`,'点赞')">点赞</button>
                         <button v-show="!praiseBtnShow" type="button" @click="cancelStar(`${detail.id}`,'点赞')">取消点赞</button>
-
+                      <button v-show="userInfo.role == 'user'" type="button" @click="jiagou(`${detail.id}`)">加入购物车</button>
                       <!--<button v-show="userInfo && userInfo.role === 'user'" type="button" @click="ddd(`${ detail.id}`)">动作</button>-->
                     </div>
                 </div>
@@ -67,7 +67,8 @@
                         下载{{detail.vv}}
                     </a>
                 </template>
-                            
+                                                        <x-comment ref="commentRef"></x-comment>
+                        
                     </div>
                 </div>
             </div>
@@ -99,19 +100,22 @@
         await loadData(query.id)
         webLayout.value.activeNav(entityName);
     })
+    //TODO 加购
+    import AddPage from "../cart/Add"
+    const jiagou = async (id) => {
+      if(!userInfo || !userInfo.value.id || !userInfo.value.role==='user'){
+        Msg.error('请先用用户账号登录')
+        return;
+      }
+      const op = Dialog.open(AddPage, `我要加购`).setConfirmText('确认加购')
+      op.mounted(c => {
+        c.render(null,{goodsid:id})
+      })
+      op.confirm(async (c) => {
+        c.submit()
+      })
+    }
 
-    //跳转页面
-    // import AddPage from "../xxxx/Add"
-    // //新增页
-    // const ddd = async (id) => {
-    //   const op = Dialog.open(AddPage, `我要`).setConfirmText('确认')
-    //   op.mounted(c => {
-    //     c.render(null,{stuId: id})
-    //   })
-    //   op.confirm(async (c) => {
-    //     c.submit()
-    //   })
-    // }
 
     const loadData= async (id) => {
         Msg.loading("正在前往...")
@@ -122,6 +126,7 @@
         hotList.value = data.hotList;
         await hasStar(id)
         Msg.loading(false)
+                  commentRef.value.init(id,'goods')
             }
     //收藏
     const star = async (id,op='收藏') => {

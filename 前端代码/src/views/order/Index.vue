@@ -128,12 +128,31 @@
     
             <el-table-column fixed="right" label="操作">
                 <template #default="scope">
-                    <button class="btn" @click="onDetail(scope.row.id)">详情</button>
-                    <button class="btn btn-warn" v-if=" user.role.toLowerCase() == 'user'  " @click="onEdit(scope.row.id)">评价</button>
-                    <button class="btn btn-error" v-if="  user.role.toLowerCase() == ''  " @click="onDelete(scope.row.id)">取消订单</button>
-
-                  <!--                  <button v-if="user.role.toLowerCase() == 'user' && scope.row.state == '待缴纳'" -->
-                  <!--                          class="btn" @click="ups(scope.row.id,'确认支付','state','已缴纳')">立即支付</button>-->
+                  <!--          TODO-->
+                  <button class="btn" @click="onDetail(scope.row.id)">详情</button>
+                  <button class="btn btn-warn"
+                          v-if=" user.role.toLowerCase() == 'user' &&scope.row.state == '已送达'&&scope.row.pingj == '' "
+                          @click="onEdit(scope.row.id)">评价
+                  </button>
+                  <button class="btn btn-warn"
+                          v-if=" user.role.toLowerCase() == 'merchant' &&scope.row.state == '已支付' "
+                          @click="onEdit(scope.row.id)">更新物流
+                  </button>
+                  <button class="btn btn-error" v-if="  user.role.toLowerCase() == 'user'&&scope.row.state == '已下单'  "
+                          @click="onDelete(scope.row.id)">取消订单
+                  </button>
+                  <button class="btn " v-if="  user.role.toLowerCase() == 'user'&&scope.row.state == '已下单'  "
+                          @click="ups(scope.row.id,'确认支付','state','已支付')">支付
+                  </button>
+                  <button class="btn " v-if="  user.role.toLowerCase() == 'user'&&scope.row.state == '已支付'  "
+                          @click="ups(scope.row.id,'当前未送达，可申请退款，确认退款？','state','已退款')">我要退款
+                  </button>
+                  <button class="btn " v-if="  user.role.toLowerCase() == 'merchant'&&scope.row.state == '已支付'  "
+                          @click="ups(scope.row.id,'确认已送达','state','已送达')">确认已送达
+                  </button>
+                  <button class="btn " v-if="  user.role.toLowerCase() == 'user'&& scope.row.state == '已送达'  "
+                          @click="afterSell(scope.row.id)">售后申请
+                  </button>
                 </template>
             </el-table-column>
         </el-table>
@@ -173,7 +192,17 @@
     onMounted(() => {
         loadThisPage()
     })
-
+    import afterSellPage from "../afterSell/Add"
+    //新增页
+    const afterSell = async (oid) => {
+      const op = Dialog.open(afterSellPage, `售后申请`).setConfirmText('确认提交')
+      op.mounted(c => {
+        c.render(null,{oid})
+      })
+      op.confirm(async (c) => {
+        c.submit()
+      })
+    }
     //加载本页数据
     const loadThisPage = async () => {
         Msg.loading("加载中...")

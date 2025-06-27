@@ -37,6 +37,7 @@
         </el-form-item>
         </el-form>
 
+    <x-comment ref="commentRef"></x-comment>
 
 </template>
 <script setup>
@@ -48,6 +49,7 @@
         let {data} = await Http.get(`/goods/detail`, {id});
         console.log(data)
         form.value = data;
+        commentRef.value.init(form.value.id,'goods')
         Msg.loading(false)
     }
 

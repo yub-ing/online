@@ -346,29 +346,5 @@ public class IndexController extends BaseController {
     return successData(getCurrentUser());
   }
 
-  // echarts数据
-  @PostMapping("hello")
-  @ResponseBody
-  public ApiResult<List<Echart>> helloData() throws SQLException {
-    // 数据
-    List<Echart> l = new ArrayList<>();
-    {
-      // 图表
-      Echart echart = new Echart();
-      echart.setName("数");
-      echart.setType("n"); // line pie
-      // echart.setValue(studentService.count()+"");
-      // l.add(echart.init());
-    }
-    {
-      // 图表
-      Echart echart = new Echart();
-      echart.setName("统计");
-      echart.setType("bar"); // line pie
-      // echart.setDtos(sqlMapper.exec("select id as name,score as value from tb_score"));
-      // l.add(echart.init());
-    }
-    return successData(l);
-  }
 }
 

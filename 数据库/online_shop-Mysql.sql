@@ -112,6 +112,18 @@ create table tb_afterSell (
     chuljg varchar(255) comment '处理结果',
     PRIMARY KEY (`id`)
 )comment '售后申请表';
+create table tb_userComment (
+    id varchar(32) comment '主键',
+    userid varchar(255) comment '用户编号',
+    username varchar(255) comment '用户名',
+    rolech varchar(255) comment '用户角色',
+    content varchar(255) comment '内容',
+    createtime datetime comment '发布时间',
+    ctid varchar(255) comment '内容编号',
+    type varchar(255) comment '内容类型',
+    status varchar(255) comment '状态',
+    PRIMARY KEY (`id`)
+)comment '评论表';
 create table tb_notice (
     id varchar(32) comment '主键',
     title varchar(255) comment '标题',

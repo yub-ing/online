@@ -2,39 +2,47 @@
     <x-main>
         <!--搜索查询表单-->
         <el-row class="search-row">
-                                                                                                     <div v-if="user.role!=='user'" class="search-item">
-                            <span>用户</span>
-                            <div style="width: 150px">
-                                <x-select-table :header="[{label:'用户',field:'username',width:'100%'}]"
-                                                v-model="searchForm.userid"
-                                                :queryParams="[{name:'username',label:'用户'}]"
-                                                api="/user/list"
-                                                labelField="username"
-                                                valueField="id"
-                                ></x-select-table>
+                                                                                                                                <div class="search-item">
+                            <span>用户名</span>
+                                                            <div style="width: 150px">
+                                    <el-input clearable placeholder="请输入用户名" v-model="searchForm.username" maxlength="255"/>
+                                </div>
+                                                    </div>
+                                                                                                            <div class="search-item">
+                            <span>用户角色</span>
+                                                            <div style="width: 150px">
+                                    <el-input clearable placeholder="请输入用户角色" v-model="searchForm.rolech" maxlength="255"/>
+                                </div>
+                                                    </div>
+                                                                                                            <div class="search-item">
+                            <span>内容</span>
+                                                            <div style="width: 150px">
+                                    <el-input clearable placeholder="请输入内容" v-model="searchForm.content" maxlength="255"/>
+                                </div>
+                                                    </div>
+                                                                                                            <div class="search-item">
+                            <span>发布时间</span>
+                            <div style="width: 222px">
+                                <el-date-picker placeholder="发布时间起始" value-format="YYYY-MM-DD HH:mm:ss" v-model="searchForm.createtimeL" type="datetime" :shortcuts="shortcuts"/>
+                            </div>
+                            <span>至</span>
+                            <div style="width: 222px">
+                                <el-date-picker placeholder="发布时间结束" value-format="YYYY-MM-DD HH:mm:ss" v-model="searchForm.createtimeR" type="datetime" :shortcuts="shortcuts"/>
                             </div>
                         </div>
-                                                                                                             <div v-if="user.role!=='goods'" class="search-item">
-                            <span>商品</span>
+                                                                                                                                                                    <div class="search-item">
+                            <span>状态</span>
                             <div style="width: 150px">
-                                <x-select-table :header="[{label:'商品信息',field:'showtitle',width:'100%'}]"
-                                                v-model="searchForm.goodsid"
-                                                :queryParams="[{name:'showtitle',label:'商品信息'}]"
-                                                api="/goods/list"
-                                                labelField="showtitle"
-                                                valueField="id"
-                                ></x-select-table>
+                                <el-select filterable v-model="searchForm.status" clearable placeholder="请选择">
+                                    <el-option v-for="item in statusOptionList" :key="item.name" :label="item.name" :value="item.name"/>
+                                </el-select>
                             </div>
                         </div>
-                                                                                                                                                                                            
+                                                
             <button class="btn btn-m" type="primary" @click="loadThisPage">查询</button>
-            <button class="btn btn-success btn-m" v-if="user && ( user.role.toLowerCase() == 'user'   )" @click="onAdd">我要加购</button>
+            <button class="btn btn-success btn-m" v-if="user && ( user.role.toLowerCase() == ''   )" @click="onAdd">新增</button>
             <button class="btn btn-m" v-if=conf.EnableExcel @click="onExcel">导出excel</button>
             <button class="btn btn-m" v-if="user && (user.role.toLowerCase() == '')" @click="importExcel">导入excel</button>
-          <!--TODO 结算-->
-          <button class="btn" v-if="  user.role.toLowerCase() == 'user'  " @click="jiesuan()">
-            结算购物车
-          </button>
         </el-row>
         <!--搜索查询表单 end-->
 
@@ -44,49 +52,52 @@
 
         <!--数据表-->
         <el-table :data="pager.records" style="width: 100%">
-               <el-table-column label="用户">
+              <el-table-column label="用户编号">
             <template #default="scope">
-                <el-button v-if="scope.row.useridFrn" type="primary" text bg @click="useridDetail(scope.row.userid)">{{ scope.row.useridFrn.username }}</el-button>
+                <span >{{scope.row.userid}}</span>
             </template>
         </el-table-column>
-                  <el-table-column label="商品">
+                 <el-table-column label="用户名">
             <template #default="scope">
-                <el-button v-if="scope.row.goodsidFrn" type="primary" text bg @click="goodsidDetail(scope.row.goodsid)">{{ scope.row.goodsidFrn.showtitle }}</el-button>
+                <span >{{scope.row.username}}</span>
             </template>
         </el-table-column>
-                 <el-table-column label="商品图片">
+                 <el-table-column label="用户角色">
             <template #default="scope">
-                <el-tooltip class="box-item" effect="dark" :content="scope.row.tustp" placement="top-start">
-                    <x-file-view :disabled="true" :list="scope.row.tustp"></x-file-view>
-                </el-tooltip>
+                <span >{{scope.row.rolech}}</span>
             </template>
         </el-table-column>
-                 <el-table-column label="价格">
+                 <el-table-column label="内容">
             <template #default="scope">
-                <span >{{scope.row.price}}</span>
+                <span >{{scope.row.content}}</span>
             </template>
         </el-table-column>
-                 <el-table-column label="数量">
-            <template #default="scope">
-                <span >{{scope.row.count}}</span>
-            </template>
-        </el-table-column>
-                 <el-table-column label="总价">
-            <template #default="scope">
-                <span >{{scope.row.zongj}}</span>
-            </template>
-        </el-table-column>
-                 <el-table-column sortable label="加购时间">
+                 <el-table-column sortable label="发布时间">
             <template #default="scope">
                 <el-icon><timer/></el-icon><span>{{scope.row.createtime}}</span>
+            </template>
+        </el-table-column>
+                 <el-table-column label="内容编号">
+            <template #default="scope">
+                <span >{{scope.row.ctid}}</span>
+            </template>
+        </el-table-column>
+                 <el-table-column label="内容类型">
+            <template #default="scope">
+                <span >{{scope.row.type}}</span>
+            </template>
+        </el-table-column>
+                 <el-table-column label="状态">
+            <template #default="scope">
+                <span >{{scope.row.status}}</span>
             </template>
         </el-table-column>
     
             <el-table-column fixed="right" label="操作">
                 <template #default="scope">
                     <button class="btn" @click="onDetail(scope.row.id)">详情</button>
-                    <button class="btn btn-warn" v-if=" user.role.toLowerCase() == 'user'  " @click="onEdit(scope.row.id)">修改</button>
-                    <button class="btn btn-error" v-if="  user.role.toLowerCase() == 'user'  " @click="onDelete(scope.row.id)">删除</button>
+                    <button class="btn btn-warn" v-if=" user.role.toLowerCase() == 'admin'  " @click="onEdit(scope.row.id)">修改</button>
+                    <button class="btn btn-error" v-if="  user.role.toLowerCase() == 'admin'  " @click="onDelete(scope.row.id)">删除</button>
 
                   <!--                  <button v-if="user.role.toLowerCase() == 'user' && scope.row.state == '待缴纳'" -->
                   <!--                          class="btn" @click="ups(scope.row.id,'确认支付','state','已缴纳')">立即支付</button>-->
@@ -107,7 +118,7 @@
     </x-main>
 </template>
 
-<script setup name="cart">
+<script setup name="userComment">
     let conf = codeying
     import {Helper} from "core";
     let user = Cache.getUser()//当前登录用户
@@ -115,28 +126,22 @@
     import {onMounted} from "vue";
     //搜索条件表单
     let searchForm = ref({
-            userid : "",
-            goodsid : "",
+            username : "",
+            rolech : "",
+            content : "",
+            createtimeL : "",
+        createtimeR : "",
+                status : "",
     })
     //分页信息 默认查询第一页，20条数据
     let pager = ref({current: 1, size: 20})
 
+    let statusOptionList = ref([  { name:'正常'}, { name:'违规'}, ]) //状态 下拉框数据
     //钩子函数，挂载
     onMounted(() => {
         loadThisPage()
     })
-    // <!--TODO 结算-->
-    import AddPage2 from "../order/Add"
-    const jiesuan = async () => {
-      //表单查询参数和分页参数
-      const op = Dialog.open(AddPage2, `确认下单`).setConfirmText('确认支付')
-      op.mounted(c => {
-        c.render(loadThisPage)
-      })
-      op.confirm(async (c) => {
-        c.submit()
-      })
-    }
+
     //加载本页数据
     const loadThisPage = async () => {
         Msg.loading("加载中...")
@@ -145,7 +150,7 @@
             current: pager.value.current,
             size: pager.value.size
         });
-        let {data,message} = await Http.get(`/cart/list`, params);
+        let {data,message} = await Http.get(`/userComment/list`, params);
         console.log("查询条件")
         console.log(params)
         console.log("查询结果")
@@ -181,7 +186,7 @@
       const op = Msg.confirm(msg)
       op.then(async () => {
         let upsForm = {id: id, [field]: value}
-        let {success, message} = await Http.post(`/cart/save`, upsForm);
+        let {success, message} = await Http.post(`/userComment/save`, upsForm);
         if (!success) {
           Msg.error(message);
         }else{
@@ -193,7 +198,7 @@
     import AddPage from "./Add"
     //新增页
     const onAdd = async () => {
-        const op = Dialog.open(AddPage, `我要加购`).setConfirmText('确认')
+        const op = Dialog.open(AddPage, `新增`).setConfirmText('确认')
         op.mounted(c => {
             c.render(loadThisPage)
         })
@@ -203,13 +208,13 @@
     }
     //onExcel
     const onExcel = async () => {
-        Http.download({},false,"/cart/excel")
+        Http.download({},false,"/userComment/excel")
     }
     //删除
     const onDelete = async (id) => {
         const op = Msg.confirm('确定删除？')
         op.then(async () => {
-            let {success, message} = await Http.post(`/cart/delete?id=` + id);
+            let {success, message} = await Http.post(`/userComment/delete?id=` + id);
             if (!success) {
                 Msg.error(message);
             } else {
@@ -219,29 +224,13 @@
         })
     }
 
-     //用户详情页
-    import useridDetailPage from "../user/Detail";
-    const useridDetail = async (id)=> {
-        const op = Dialog.open(useridDetailPage, '详情').setCancelText('').setConfirmText('')
-        op.mounted(c => {
-            c.render(id)
-        })
-    }
-     //商品详情页
-    import goodsidDetailPage from "../goods/Detail";
-    const goodsidDetail = async (id)=> {
-        const op = Dialog.open(goodsidDetailPage, '详情').setCancelText('').setConfirmText('')
-        op.mounted(c => {
-            c.render(id)
-        })
-    }
 
 
     import ImportExcel from "../../components/lib/ImportExcel";
     const importExcel = ()=>{
-        const op = Dialog.open(ImportExcel, `导入购物车数据`).setCancelText('').setConfirmText('')
+        const op = Dialog.open(ImportExcel, `导入评论数据`).setCancelText('').setConfirmText('')
         op.mounted(c => {
-            c.render('cart',loadThisPage)
+            c.render('userComment',loadThisPage)
         })
     }
 </script>

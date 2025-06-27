@@ -103,6 +103,12 @@ const routes = [
           component: () => import('../views/afterSell/Index.vue')
         },
         {
+          meta: {history: true, title: "评论"},
+          path: '/hello/codeying/userComment',
+          name: 'userComment',
+          component: () => import('../views/userComment/Index.vue')
+        },
+        {
           meta: {history: true, title: "公告"},
           path: '/hello/codeying/notice',
           name: 'notice',

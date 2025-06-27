@@ -26,7 +26,8 @@ export default [
             {path: "/orderdetail", name: "订单详情", id: "1_6", parent: "1",roles:['admin','user','merchant',]},
             {path: "/order", name: "用户订单", id: "1_7", parent: "1",roles:['admin','user','merchant',]},
             {path: "/afterSell", name: "售后申请", id: "1_8", parent: "1",roles:['admin','merchant','user',]},
-            {path: "/notice", name: "公告", id: "1_9", parent: "1",roles:['admin','user','merchant',]},
+            {path: "/userComment", name: "评论", id: "1_9", parent: "1",roles:['admin',]},
+            {path: "/notice", name: "公告", id: "1_10", parent: "1",roles:['admin','user','merchant',]},
         ]
     },
     {
