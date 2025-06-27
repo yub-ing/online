@@ -398,7 +398,7 @@
                                                                                          <td>订单详情...</td>
                                                                                          <td>总价格...</td>
                                                                                          <td>
-                                                                    已下单、                                                                    已支付、                                                                    已送达、                                                                    已退款                                                            </td>
+                                                                    已下单、                                                                    已支付、                                                                    已送达、                                                                    已退款、                                                                    售后中、                                                                    售后完成                                                            </td>
                                                                                                  <td>物流单号...</td>
                                                                                          <td>物流信息...</td>
                                                                                          <td>评价...</td>
@@ -412,6 +412,63 @@
                                                              <td>...</td>
                                                              <td>...</td>
                                                              <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                                                             <td>...</td>
+                            </tr>
+        </table>
+        <el-upload
+                ref="uploadRef"
+                class="upload-demo"
+                action="#"
+                :limit="1"
+                :auto-upload="false"
+                :on-exceed="handleExceed"
+                :http-request="upload"
+        >
+            <template #trigger>
+                <el-button type="primary">选择文件</el-button>
+            </template>
+            <el-button class="ml-3" type="success" @click="submitUpload">
+                立即导入
+            </el-button>
+            <template #tip>
+                <div class="el-upload__tip text-red">
+                    请按照以上格式上传excel文件
+                </div>
+            </template>
+        </el-upload>
+    </template>
+    <template v-if="type === 'afterSell'">
+        <p style="color: red">提示：按照以下格式上传,第一行是表头</p>
+        <table class="modal-table">
+            <tr>
+                                                                                  <td style="background-color: #0FB25F">用户</td>
+                                                             <td style="background-color: #0FB25F">订单号</td>
+                                                             <td style="background-color: #0FB25F">售后类型</td>
+                                                             <td style="background-color: #0FB25F">要求售后内容</td>
+                                                             <td style="background-color: #0FB25F">产品问题拍照上传</td>
+                                                             <td style="background-color: #0FB25F">售后申请时间</td>
+                                                             <td style="background-color: #0FB25F">处理状态</td>
+                                                             <td style="background-color: #0FB25F">处理结果</td>
+                            </tr>
+            <tr>
+                                                                                                              <td>确保该用户在用户表中存在</td>
+                                                                                                 <td>确保该订单号在用户订单表中存在</td>
+                                                                                                 <td>售后类型...</td>
+                                                                                         <td>要求售后内容...</td>
+                                                                                         <td>产品问题拍照上传...</td>
+                                                                                         <td>格式例：1999年06月05日 12:15:00</td>
+                                                                                                 <td>
+                                                                    待处理、                                                                    已处理                                                            </td>
+                                                                                                 <td>处理结果...</td>
+                            </tr>
+            <tr>
+                                                                                  <td>...</td>
                                                              <td>...</td>
                                                              <td>...</td>
                                                              <td>...</td>

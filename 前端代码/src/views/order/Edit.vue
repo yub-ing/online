@@ -84,7 +84,7 @@
         state:{required: true, message: "状态必填", trigger: "blur"},
     })
 
-     let stateOptionList = ref([  { name:'已下单'}, { name:'已支付'}, { name:'已送达'}, { name:'已退款'}, ]) //状态 下拉框数据
+     let stateOptionList = ref([  { name:'已下单'}, { name:'已支付'}, { name:'已送达'}, { name:'已退款'}, { name:'售后中'}, { name:'售后完成'}, ]) //状态 下拉框数据
 
     const render = async (id,loadThisPage) => {
         Msg.loading("加载中..")

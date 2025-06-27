@@ -20,6 +20,7 @@ public class BaseController {
   @Autowired protected CartService cartService;
   @Autowired protected OrderdetailService orderdetailService;
   @Autowired protected OrderService orderService;
+  @Autowired protected AfterSellService afterSellService;
   @Autowired protected NoticeService noticeService;
   @Autowired protected StarService starService;
   @Autowired protected HttpServletRequest req;

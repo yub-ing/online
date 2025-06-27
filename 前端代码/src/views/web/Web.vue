@@ -6,13 +6,13 @@
             <div class="banner">
                 <el-carousel height="400px">
                     <el-carousel-item>
-                        <img :src="`${publicPath}img/b1.png`">
+                        <img :src="`${publicPath}img/b1.jpg`">
                     </el-carousel-item>
                     <el-carousel-item>
-                        <img :src="`${publicPath}img/b2.png`">
+                        <img :src="`${publicPath}img/b2.jpg`">
                     </el-carousel-item>
                     <el-carousel-item>
-                        <img :src="`${publicPath}img/b3.png`">
+                        <img :src="`${publicPath}img/b3.jpg`">
                     </el-carousel-item>
                 </el-carousel>
             </div>

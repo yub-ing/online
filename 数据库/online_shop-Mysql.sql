@@ -100,6 +100,18 @@ create table tb_order (
     pingj varchar(255) comment '评价',
     PRIMARY KEY (`id`)
 )comment '用户订单表';
+create table tb_afterSell (
+    id varchar(32) comment '主键',
+    userid varchar(32) comment '用户',
+    oid varchar(32) comment '订单号',
+    typer varchar(255) comment '售后类型',
+    content varchar(255) comment '要求售后内容',
+    pic varchar(255) comment '产品问题拍照上传',
+    createtime datetime comment '售后申请时间',
+    state varchar(255) comment '处理状态',
+    chuljg varchar(255) comment '处理结果',
+    PRIMARY KEY (`id`)
+)comment '售后申请表';
 create table tb_notice (
     id varchar(32) comment '主键',
     title varchar(255) comment '标题',

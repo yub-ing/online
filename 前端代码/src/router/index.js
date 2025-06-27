@@ -97,6 +97,12 @@ const routes = [
           component: () => import('../views/order/Index.vue')
         },
         {
+          meta: {history: true, title: "售后申请"},
+          path: '/hello/codeying/afterSell',
+          name: 'afterSell',
+          component: () => import('../views/afterSell/Index.vue')
+        },
+        {
           meta: {history: true, title: "公告"},
           path: '/hello/codeying/notice',
           name: 'notice',
