@@ -14,6 +14,7 @@ import java.io.StringWriter;
 
 /**
  * 全局错误处理
+ *
  */
 @ControllerAdvice
 public class GlobalExceptionHandler extends BaseController {

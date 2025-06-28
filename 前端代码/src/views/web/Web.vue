@@ -1,67 +1,67 @@
 <!--网站的一种类型，默认图文-->
 <template>
     <x-web ref="webLayout" :doSearch="doHandle">
-        <div class="main-banner">
-            <!--轮播图整体div-->
-            <div class="banner">
-                <el-carousel height="400px">
-                    <el-carousel-item>
-                        <img :src="`${publicPath}img/b1.png`">
-                    </el-carousel-item>
-                    <el-carousel-item>
-                        <img :src="`${publicPath}img/b2.png`">
-                    </el-carousel-item>
-                    <el-carousel-item>
-                        <img :src="`${publicPath}img/b3.png`">
-                    </el-carousel-item>
-                </el-carousel>
-            </div>
-
-            <div class="main-banner-notice">
-                <div><h3>通知公告</h3></div>
-                <div>
-                    <template v-for="i in webData.notices">
-                        <h5>{{i.title}}</h5>
-                        <p>{{i.content}}</p>
-                    </template>
-                </div>
-            </div>
+      <div class="main-banner">
+        <!--轮播图整体div-->
+        <div class="banner">
+          <el-carousel height="400px">
+            <el-carousel-item>
+              <img :src="`${publicPath}img/b1.png`">
+            </el-carousel-item>
+            <el-carousel-item>
+              <img :src="`${publicPath}img/b2.png`">
+            </el-carousel-item>
+            <el-carousel-item>
+              <img :src="`${publicPath}img/b3.png`">
+            </el-carousel-item>
+          </el-carousel>
         </div>
 
-        <div class="main-content">
-            <div class="m-body">
-                <div class="content-webtitle">
-                    <h2>热门</h2>
-                </div>
-                <div class="content-l">
-                    <div class="content-l-item" v-for="i in webData.hotList">
-                        <a  @click="goto(`/welcome/${webData.entityName}/detail?id=${i.itemid}`)">
-                            <img :src="filePath + i.showpic">
-                            <p class="content-l-item-title" :title="i.showtitle">{{ i.showtitle}}</p>
-                            <p class="content-l-item-tip" >{{ i.showdesc}}</p>
-                            <p class="content-l-item-tip" >收藏：{{ i.count}}</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="m-body">
-                <div class="content-webtitle">
-                    <h2>全部</h2>
-                </div>
-                <div class="content-l">
-                    <div class="content-l-item" v-for="i in webData.itemList">
-                        <a  @click="goto(`/welcome/${webData.entityName}/detail?id=${i.id}`)">
-                            <img :src="filePath + i.showpic">
-                            <p class="content-l-item-title" :title="i.showtitle">{{ i.showtitle}}</p>
-                            <p class="content-l-item-tip" >{{ i.showdesc}}</p>
-                        </a>
-                        <a @click="star(`${i.id}`,webData.entityName)">
-                            <p class="content-l-item-tip">收藏</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="main-banner-notice">
+          <div><h3>通知公告</h3></div>
+          <div>
+            <template v-for="i in webData.notices">
+              <h5>{{i.title}}</h5>
+              <p>{{i.content}}</p>
+            </template>
+          </div>
         </div>
+      </div>
+
+      <div class="main-content">
+        <div class="m-body">
+          <div class="content-webtitle">
+            <h2>热门</h2>
+          </div>
+          <div class="content-l">
+            <div class="content-l-item" v-for="i in webData.hotList">
+              <a  @click="goto(`/welcome/${webData.entityName}/detail?id=${i.itemid}`)">
+                <img :src="filePath + i.showpic">
+                <p class="content-l-item-title" :title="i.showtitle">{{ i.showtitle}}</p>
+                <p class="content-l-item-tip" >{{ i.showdesc}}</p>
+                <p class="content-l-item-tip" >收藏：{{ i.count}}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="m-body">
+          <div class="content-webtitle">
+            <h2>全部</h2>
+          </div>
+          <div class="content-l">
+            <div class="content-l-item" v-for="i in webData.itemList">
+              <a  @click="goto(`/welcome/${webData.entityName}/detail?id=${i.id}`)">
+                <img :src="filePath + i.showpic">
+                <p class="content-l-item-title" :title="i.showtitle">{{ i.showtitle}}</p>
+                <p class="content-l-item-tip" >{{ i.showdesc}}</p>
+              </a>
+              <a @click="star(`${i.id}`,webData.entityName)">
+                <p class="content-l-item-tip">收藏</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </x-web>
 </template>

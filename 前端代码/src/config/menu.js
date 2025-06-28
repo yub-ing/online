@@ -30,10 +30,6 @@ export default [
             {path: "/notice", name: "公告", id: "1_10", parent: "1",roles:['admin','user','merchant',]},
         ]
     },
-    {
-        name: "我的消息",
-        id: "chat",
-        path: "/hello/chat"
-    },
+
 ]
 

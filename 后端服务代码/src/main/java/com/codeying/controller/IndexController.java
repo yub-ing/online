@@ -346,5 +346,13 @@ public class IndexController extends BaseController {
     return successData(getCurrentUser());
   }
 
+  // echarts数据
+  @PostMapping("hello")
+  @ResponseBody
+  public ApiResult<List<Echart>> helloData() throws SQLException {
+    // 数据
+    List<Echart> l = new ArrayList<>();
+    return successData(l);
+  }
 }
 

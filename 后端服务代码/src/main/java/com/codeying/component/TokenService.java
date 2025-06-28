@@ -17,6 +17,9 @@ import org.springframework.util.StringUtils;
 import java.util.Map;
 
 
+/**
+ * token处理类
+ */
 @Service
 public class TokenService{
     Logger log = LoggerFactory.getLogger(getClass());

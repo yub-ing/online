@@ -8,6 +8,9 @@
         <img v-else :src="`${publicPath}images/menu-expand-0.png`" style="width: 30px">
       </div>
       <x-history></x-history>
+      <div v-show="router.currentRoute.value.fullPath==='/'||router.currentRoute.value.fullPath==='/hello'" style="height: 90vh;overflow: scroll">
+        <p>欢迎进入</p>
+      </div>
 
       <div style="background: var(--main-bg); background-size: cover;" class="x-p-10" :style="{height: `${mainHeight}px`}">
         <router-view v-slot="{ Component, route }">
@@ -35,9 +38,7 @@ const {menu} = useStore();
 let {isCollapse, mainHeight} = storeToRefs(config)
 
 onMounted(()=>{
-
 })
-
 const setExpand = (isExpand) => {
   config.setCollapse(isExpand)
 }

@@ -190,6 +190,7 @@ public class OrderController extends BaseController {
           order.setCreatetime(createtime);
           order.setMid(food.getMid());
           order.setSname(sname);
+          order.setNumb("YD"+DateUtil.dateToStr(new Date(),"yyyyMMddHHmmss"));
           order.setStele(stele);
           order.setSaddr(saddr);
           order.setDingdbz(dingdbz);
